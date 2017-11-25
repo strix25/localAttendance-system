@@ -11,41 +11,28 @@
     
         let date = todaysTimestamp();
         var data = database.getItem('workingData');
-
+        
+        
+        
         if(data !== null){
-            
+            // let parsano = JSON.stringify(data);
+            // parsano = JSON.parse(data);
+           
+            console.log(data);
         }else{
-            let dodajTaFilm = `[
+            let addDate = `[
                 {
-                    "sedemnajst": {
-                        "november":[
-                            {
-                                "day": "2.11.2017 ",
-                                "month": "8:00",
-                                "year": "14:00",
-                                "hour": "2.11.2017",
-                                "min": {}
-                            },
-                        ],
-                        "december":[]
-                    },
-                    "osemnajst":{
-                        "januar":[],
-                        "februar":[],
-                        "marec":[],
-                        "april":[],
-                        "maj":[],
-                        "junij":[],
-                        "julij":[],
-                        "avgust":[],
-                        "septermber":[],
-                        "oktober":[],
-                        "november":[],
-                        "december":[]
-                    }
+                    "arrival":"{
+                        "day": "${date.day}",
+                        "month": "${date.month}",
+                        "year": "${date.year}",
+                        "hour": "${date.hour}",
+                        "min": "${date.min}"
+                    }"
                 }
             ]`;
-            baza.setItem('mojiFilmi', dodajTaFilm);
+            
+            database.setItem('workingData', addDate);
         }
         
         
@@ -71,6 +58,7 @@
         let year = date.getUTCFullYear();
         let hour = date.getHours();
         let min = date.getMinutes();
+        //pre minutaj kda odstevas pa dobijs 16:00 - 8:50 samo pristejes 60 ka dobijs pravo vrednost
 
         let formatedDate = {
             day: day,
