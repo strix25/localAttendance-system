@@ -15,8 +15,7 @@
         
         
         if(data !== null){
-            // let parsano = JSON.stringify(data);
-            // parsano = JSON.parse(data);
+            
             let parsedData = JSON.parse(data);
             let newTimestamp =  {
                 "arrival":{
@@ -27,20 +26,36 @@
                     min: date.min
                 }
             };
-            parsedData.push(newTimestamp);
-            database.setItem('workingData', JSON.stringify(parsedData));
 
+            //preverite, če že obstaja prihod z ten datumom
+            //če obstaja izpišemo opozorilo :)
+            var arivalExist = false;
+            for (let prihod in parsedData) {
+                if (parsedData[prihod].arrival.day === date.day && parsedData[prihod].arrival.month === date.month && parsedData[prihod].arrival.year === date.year)  {
+                    arivalExist = true;
+                    break;
+                }
+                
+            }
+
+            if(arivalExist){
+                alert("already exist");      
+            }
+            else{
+                parsedData.push(newTimestamp);
+                database.setItem('workingData', JSON.stringify(parsedData));
+            }
 
             
         }else{
             let addDate = `[
                 {
                     "arrival":{
-                        "day": "${date.day}",
-                        "month": "${date.month}",
-                        "year": "${date.year}",
-                        "hour": "${date.hour}",
-                        "min": "${date.min}"
+                        "day": ${date.day},
+                        "month": ${date.month},
+                        "year": ${date.year},
+                        "hour": ${date.hour},
+                        "min": ${date.min}
                     }
                 }
             ]`;
