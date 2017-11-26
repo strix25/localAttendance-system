@@ -70,8 +70,26 @@
     departureBtn.addEventListener('click', () => {
         
         let date = todaysTimestamp();
-                                                            
+        var data = database.getItem('workingData');
+
+        let parsedData = JSON.parse(data);
+
+        for (let prihod in parsedData) {
+            if (parsedData[prihod].arrival.day === date.day && parsedData[prihod].arrival.month === date.month && parsedData[prihod].arrival.year === date.year)  {
+                parsedData[prihod].departude = {
+                    day: date.day,
+                    month: date.month,
+                    year: date.year,
+                    hour: date.hour,
+                    min: date.min
+                };
+                break;
+            }
             
+        }
+        
+        
+        database.setItem('workingData', JSON.stringify(parsedData));
     });
 
 
