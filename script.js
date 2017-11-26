@@ -17,18 +17,31 @@
         if(data !== null){
             // let parsano = JSON.stringify(data);
             // parsano = JSON.parse(data);
-           
-            console.log(data);
+            let parsedData = JSON.parse(data);
+            let newTimestamp =  {
+                "arrival":{
+                    day: date.day,
+                    month: date.month,
+                    year: date.year,
+                    hour: date.hour,
+                    min: date.min
+                }
+            };
+            parsedData.push(newTimestamp);
+            database.setItem('workingData', JSON.stringify(parsedData));
+
+
+            
         }else{
             let addDate = `[
                 {
-                    "arrival":"{
+                    "arrival":{
                         "day": "${date.day}",
                         "month": "${date.month}",
                         "year": "${date.year}",
                         "hour": "${date.hour}",
                         "min": "${date.min}"
-                    }"
+                    }
                 }
             ]`;
             
