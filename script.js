@@ -72,24 +72,39 @@
         let date = todaysTimestamp();
         var data = database.getItem('workingData');
 
-        let parsedData = JSON.parse(data);
+        if(data === null){
+            alert("you need to arive first bruh");
+        }
+        else{
 
-        for (let prihod in parsedData) {
-            if (parsedData[prihod].arrival.day === date.day && parsedData[prihod].arrival.month === date.month && parsedData[prihod].arrival.year === date.year)  {
-                parsedData[prihod].departude = {
-                    day: date.day,
-                    month: date.month,
-                    year: date.year,
-                    hour: date.hour,
-                    min: date.min
-                };
-                break;
+            let hasDepart = false;
+
+            let parsedData = JSON.parse(data);
+
+            for (let prihod in parsedData) {
+                if (parsedData[prihod].arrival.day === date.day && parsedData[prihod].arrival.month === date.month && parsedData[prihod].arrival.year === date.year)  {
+                    if(parsedData[prihod].hasOwnProperty("departure")){
+                        hasDepart = true;
+                        break;
+                    }
+                    parsedData[prihod].departude = {
+                        day: date.day,
+                        month: date.month,
+                        year: date.year,
+                        hour: date.hour,
+                        min: date.min
+                    };
+                    break;
+                }
+                
             }
             
+            if(hasDepart){
+                 database.setItem('workingData', JSON.stringify(parsedData));
+            }else{
+                alert("cant leave us twice");
+            }
         }
-        
-        
-        database.setItem('workingData', JSON.stringify(parsedData));
     });
 
 
