@@ -86,23 +86,27 @@
                     if(parsedData[prihod].hasOwnProperty("departure")){
                         hasDepart = true;
                         break;
+                        alert("kurec");
                     }
-                    parsedData[prihod].departude = {
-                        day: date.day,
-                        month: date.month,
-                        year: date.year,
-                        hour: date.hour,
-                        min: date.min
-                    };
+                    else{
+                        parsedData[prihod].departure = {
+                            day: date.day,
+                            month: date.month,
+                            year: date.year,
+                            hour: date.hour,
+                            min: date.min
+                        };
+                    }
                     break;
                 }
                 
             }
             
             if(hasDepart){
-                 database.setItem('workingData', JSON.stringify(parsedData));
-            }else{
                 alert("cant leave us twice");
+            }else{
+                
+                database.setItem('workingData', JSON.stringify(parsedData));
             }
         }
     });
@@ -132,6 +136,16 @@
         return formatedDate;
     }
 
+function izpis(){
+    var data = database.getItem('workingData');
+    
+    
+    
 
+        
+        let parsedData = JSON.parse(data);
+
+        console.log(parsedData);
+}
 
 // })();
