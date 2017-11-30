@@ -27,8 +27,8 @@
                 }
             };
 
-            //preverite, če že obstaja prihod z ten datumom
-            //če obstaja izpišemo opozorilo :)
+            
+            //check if this person arrived today already
             var arivalExist = false;
             for (let prihod in parsedData) {
                 if (parsedData[prihod].arrival.day === date.day && parsedData[prihod].arrival.month === date.month && parsedData[prihod].arrival.year === date.year)  {
