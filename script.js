@@ -73,7 +73,7 @@
         var data = database.getItem('workingData');
 
         if(data === null){
-            alert("you need to arive first bruh");
+            alert("you need to arrive first bruh");
         }
         else{
 
