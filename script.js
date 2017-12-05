@@ -86,9 +86,10 @@
                     if(parsedData[prihod].hasOwnProperty("departure")){
                         hasDepart = true;
                         break;
-                        alert("kurec");
+                        
                     }
-                    else{
+                    else{                    
+                        //insert departure timestamp
                         parsedData[prihod].departure = {
                             day: date.day,
                             month: date.month,
@@ -96,6 +97,13 @@
                             hour: date.hour,
                             min: date.min
                         };
+                        
+                        //calculate hours worked for this day
+                        let minsWorked = ((parsedData[prihod].departure.hour * 60) +parsedData[prihod].departure.min) - ((parsedData[prihod].arrival.hour*60) + parsedData[prihod].arrival.min);
+                        
+                        parsedData[prihod].departure.minWorked = minsWorked;
+
+
                     }
                     break;
                 }
