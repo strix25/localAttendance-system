@@ -3,7 +3,7 @@
     const arrivalBtn = document.getElementById('arrival');
     const departureBtn = document.getElementById('departure');
     const database = window.localStorage;
-
+    
     
 
     //arrival
@@ -119,7 +119,10 @@
                 database.setItem('workingData', JSON.stringify(parsedData));
             }
         }
-        alert(outputHoursForCurrMonth());
+
+        let output = document.getElementById("output");
+        output.innerHTML = outputHoursForCurrMonth();
+        
     });
 
 
