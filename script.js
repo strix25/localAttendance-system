@@ -110,6 +110,8 @@
                 
             }
             
+
+
             if(hasDepart){
                 alert("cant leave us twice");
             }else{
@@ -117,6 +119,7 @@
                 database.setItem('workingData', JSON.stringify(parsedData));
             }
         }
+        alert(outputHoursForCurrMonth());
     });
 
 
@@ -144,16 +147,23 @@
         return formatedDate;
     }
 
-function izpis(){
+
+
+//output working hours per month: 
+function outputHoursForCurrMonth(){
+    let date = todaysTimestamp();
+    let month = date.month;
     var data = database.getItem('workingData');
-    
-    
-    
 
-        
-        let parsedData = JSON.parse(data);
+    let parsedData = JSON.parse(data);
+    let sumHours = 0;
 
-        console.log(parsedData);
+    for (let key in parsedData) {
+        if(parsedData[key].arrival.month === month){
+            sumHours += parsedData[key].departure.minWorked;
+        }
+    }
+    return sumHours;
 }
 
 // })();
